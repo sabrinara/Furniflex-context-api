@@ -1,25 +1,184 @@
-// src/components/NavBar.js
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Logo from "../../../public/icon.png";
+import { AiOutlineMenu } from "react-icons/ai";
+import { useEffect } from "react";
+import { useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
+import { FaCartArrowDown } from "react-icons/fa";
 
-const NavBar = () => {
-  const { user, logout } = useContext(AuthContext);
+const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
 
-  return (
-    <nav>
-      <Link to="/">Store</Link>
-      <Link to="/cart">Cart</Link>
-      {user ? (
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => { })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  const [showDashboardDropdown, setShowDashboardDropdown] = useState(false);
+
+  const toggleDashboardDropdown = () => {
+    setShowDashboardDropdown(!showDashboardDropdown);
+  };
+
+  useEffect(() => {
+    // Close the dashboard dropdown when the user logs out
+    setShowDashboardDropdown(false);
+  }, [user]);
+  const navLinks = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+
+
+
+      {user ?
         <>
-          <span>Welcome, {user.username}</span>
-          <button onClick={logout}>Logout</button>
+          <li>
+            <NavLink to="/products">Products</NavLink>
+          </li>
+          <li>
+            <NavLink to="/categories">Categories</NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/custom">Custom</NavLink>
+          </li>
+          <li>
+            <NavLink to="/blog">Blog</NavLink>
+          </li>
+
         </>
-      ) : (
-        <Link to="/login">Login</Link>
-      )}
-    </nav>
+        :
+        <>
+
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+          <li>
+            <NavLink to="/signup">Sign Up</NavLink>
+          </li>
+
+        </>
+
+      }
+    </>
+  );
+  return (
+    <div className="sticky inset-0 z-10 block h-max w-full max-w-full rounded-none  bg-opacity-40 px-4  backdrop-blur-2xl backdrop-saturate-200 md:px-8 ">
+      <div className="navbar p-1 ">
+        <div className="navbar-start">
+          <div className="dropdown lg:hidden">
+            <label tabIndex={0} className="btn btn-ghost  hover:bg-cyan-900 hover:text-white   lg:hidden">
+              <AiOutlineMenu className="w-3 h-4"></AiOutlineMenu>
+            </label>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-cyan-900 text-white rounded w-32">
+              {navLinks}
+            </ul>
+          </div>
+          <div className=" hidden lg:flex ">
+            <Link to="/" className="flex mr-4   items-center normal-case  font-serif font-extrabold text-4xl lg:text-4xl ">
+              <img className="w-8 h-8 md:w-10 md:h-10  mx-auto" src={Logo} alt="" />
+              <h1 className="text-2xl md:text-3xl mx-2 text-black">Furni<span className="text-2xl md:text-3xl text-[#1E99F5]">Flex</span></h1>
+            </Link>
+
+
+          </div>
+
+        </div>
+        <div className="navbar-center ">
+          <div className="hidden lg:flex">
+            <ul className="menu menu-horizontal px-1 gap-6">
+              {navLinks}
+            </ul>
+          </div>
+          <div className="flex md:hidden  ">
+            <Link to="/" className="flex mr-4   items-center normal-case  font-serif font-extrabold text-4xl lg:text-4xl ">
+              <img className="w-8 h-8 md:w-10 md:h-10  mx-auto" src={Logo} alt="" />
+              <h1 className="text-2xl md:text-3xl mx-2 text-black">Furni<span className="text-2xl md:text-3xl text-[#1E99F5]">Flex</span></h1>
+            </Link>
+
+
+          </div>
+        </div>
+
+        <div className="navbar-end">
+          <div className="flex flex-row items-center justify-center gap-4">
+          <FaCartArrowDown className="w-6 h-6 ml-3 text-gray-500"></FaCartArrowDown>
+            {
+              user?.email &&
+
+              <div className="dropdown dropdown-end ml-1">
+                <label tabIndex={0} className=" bg-cyan-900">
+                  <div className="w-8  ">
+                    <img src={user.photoURL} className="w-8 h-8 rounded-full" />
+                  </div>
+                </label>
+                <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content rounded w-32  bg-sky-800 bg-opacity-80 text-white">
+                  <li>
+                    <a className="justify-between hover:bg-cyan-900 hover:text-white  focus:text-white " href="/profile">
+                      {user.displayName}
+                    </a>
+                  </li>
+                  <div className="dropdown dropdown-bottom">
+                    <label
+                      tabIndex={0}
+                      className=' ml-3'
+                      onClick={toggleDashboardDropdown}
+                    >
+                      Dashboard
+                    </label>
+                    {showDashboardDropdown && (
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content z-[3] menu shadow rounded w-40 bg-sky-800 bg-opacity-80 text-white"
+                      >
+
+                        <NavLink
+                          to="/addservice"
+                          className="px-4 py-1 hover:bg-base-300 rounded-lg"
+                        >
+                          Add a Service
+                        </NavLink>
+                        <NavLink
+                          to="/manageservices"
+                          className="px-4 py-1 hover:bg-base-300 rounded-lg"
+                        >
+                          My Services
+                        </NavLink>
+                        <NavLink
+                          to="/bookings"
+                          className="px-4 py-1 hover:bg-base-300 rounded-lg"
+                        >
+                          My Sechedules
+                        </NavLink>
+                        <NavLink
+                          to="/pending"
+                          className="px-4 py-1 hover:bg-base-300 rounded-lg"
+                        >
+                          My Pendings
+                        </NavLink>
+                      </ul>
+                    )}
+                  </div>
+                  <li ><a onClick={handleLogOut} className="hover:bg-cyan-900 hover:text-white  focus:text-white" >Logout</a></li>
+                </ul>
+              </div>
+            }
+        
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
   );
 };
 
-export default NavBar;
+export default Navbar;

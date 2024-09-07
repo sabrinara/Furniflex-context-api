@@ -1,10 +1,15 @@
+import Store from "../Components/Store/Store";
+import Sidebar from "./Shared/Sidebar";
 
 
 const Home = () => {
     return (
-        <div>
-            <h1>Home</h1>
-        </div>
+       
+            <div className="w-full ">
+
+                <Store />
+            </div>
+  
     );
 };
 
