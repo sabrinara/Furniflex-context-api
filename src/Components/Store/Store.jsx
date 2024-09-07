@@ -1,7 +1,8 @@
 // src/components/Store.js
 import { useContext } from "react";
-import { ProductContext } from "../context/ProductContext";
-import { CartContext } from "../context/CartContext";
+import { ProductContext } from "../../Context/ProductContext";
+import { CartContext } from "../../Context/CartContext";
+
 
 const Store = () => {
   const { products } = useContext(ProductContext);

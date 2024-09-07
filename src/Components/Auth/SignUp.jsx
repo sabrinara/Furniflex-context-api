@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../Context/AuthProvider";
 
-const Register = () => {
+const SignUp = () => {
 
     const { createUser, googleSignIn, handleUpdateProfile } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -124,4 +124,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default SignUp;

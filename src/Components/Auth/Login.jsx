@@ -76,7 +76,7 @@ const Login = () => {
                         </form>
 
                         <div className="flex flex-col items-center justify-center mb-6">
-                            <p className="text-[15px]">New in the Website? Please<Link to="/register"><button className="p-1 text-blue-700 font-bold">Register</button></Link></p>
+                            <p className="text-[15px]">New in the Website? Please<Link to="/signup"><button className="p-1 text-blue-700 font-bold">Sign Up</button></Link></p>
                             <p>Or sign up with<button onClick={handleGoogleSignIn} className="btn bg-emerald-100 text-blue-700 font-bold"><FaGoogle></FaGoogle>Google</button></p>
                         </div>
                     </div>
