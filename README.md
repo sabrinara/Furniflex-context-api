@@ -1,6 +1,6 @@
 # FURNIFLEX 
-#### A react e-commerce project using context-API, with dummy data
-##### Live: https://furniflex-contest-api.netlify.app/
+## A react e-commerce project using context-API, with dummy data
+#### Live: https://furniflex-contest-api.netlify.app/
 
 
 - Used React Router Dom
