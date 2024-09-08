@@ -1,17 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom';
-import ErrorPage from '../Layouts/ErrorPage';
 import Home from '../Pages/Home';
 import Login from '../Components/Auth/Login';
 import SignUp from '../Components/Auth/SignUp';
-import Store from '../Components/Store/Store';
 import Root from '../Layouts/Root';
 import Cart from '../Components/Cart/Cart';
+import NotFound from '../Layouts/NotFound';
 
 const router = createBrowserRouter([
     {
         path: "/",
         element:<Root></Root>,
-        errorElement: <ErrorPage></ErrorPage>,
+        errorElement: <NotFound></NotFound>,
         children: [
             {
                 path: "/",
