@@ -4,12 +4,11 @@ import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";  // Import eye ico
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../Context/AuthProvider";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
     const { createUser, googleSignIn, handleUpdateProfile } = useContext(AuthContext);
     const navigate = useNavigate();
-
-    // State to toggle password visibility
     const [showPassword, setShowPassword] = useState(false);
 
     const handleRegister = async (e) => {
@@ -19,7 +18,7 @@ const Register = () => {
         const firstName = form.get('firstName');
         const lastName = form.get('lastName');
         const fullName = `${firstName} ${lastName}`;
-        const photo = form.get('photo');
+        // const photo = form.get('photo');
         const email = form.get('email');
         const password = form.get('password');
         const accepted = e.target.terms.checked;
@@ -36,9 +35,9 @@ const Register = () => {
             }
 
             await createUser(email, password);
-            await handleUpdateProfile(fullName, photo);
+            await handleUpdateProfile(fullName);
 
-            toast.success('Successfully Registered');
+            toast.success('Successfully Sign up');
             navigate('/');
         } catch (error) {
             toast.error(error.message);
@@ -50,6 +49,7 @@ const Register = () => {
             .then((result) => {
                 console.log(result.user);
                 toast('Successfully Logged in');
+                navigate('/');
             })
             .catch(error => {
                 console.error(error);
@@ -57,118 +57,127 @@ const Register = () => {
             });
     };
 
-    // Function to toggle password visibility
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
     return (
-        <div>
-            <div className="hero min-h-screen bg-base-200 mb-8">
-                <div className="hero-content flex-col">
-                    <div className="text-center mt-8 mb-4">
-                        <h1 className="text-5xl font-bold text-cyan-800">Register now!</h1>
-                    </div>
-                    <div className="card flex-shrink-0 w-full md:w-[100rem] max-w-xl shadow-2xl bg-emerald-100">
-                        <form className="card-body" onSubmit={handleRegister}>
-                            {/* First Name Field */}
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">First Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    placeholder="First Name"
-                                    className="input input-bordered"
-                                    required
-                                />
-                            </div>
+        <div className="flex justify-center ">
+            <div className="w-1/2">
+                <div className="hero bg-white h-screen">
+                    <div className="hero-content flex-col my-10">
+                        <div className="flex flex-col justify-center items-center text-center">
+                            <h1 className="text-2xl font-bold text-black">Welcom To</h1>
+                            <h1 className="text-5xl text-black font-bold text-center">Furni<span className="text-sky-600">Flex</span></h1>
+                            <p>Signup for purchase your desire products</p>
+                        </div>
+                        <div className="flex flex-col justify-center w-full md:w-[80rem] max-w-xl shadow-2xl ">
+                            <form className="flex flex-col mx-8 mt-4 justify-center gap-2 " onSubmit={handleRegister}>
 
-                            {/* Last Name Field */}
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Last Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    placeholder="Last Name"
-                                    className="input input-bordered"
-                                    required
-                                />
-                            </div>
+                                < div className="flex justify-between mr-4">
+                                    <div className="form-control border px-3">
+                                        <label className="label ">
+                                            <span className="label-text text-lg">First Name</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="firstName"
+                                            className=" px-4 rounded-none bg-white"
+                                            required
+                                        />
+                                    </div>
 
-                            {/* Profile Picture Field */}
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Profile Picture</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="photo"
-                                    placeholder="Photo URL"
-                                    className="input input-bordered"
-                                    required
-                                />
-                            </div>
 
-                            {/* Email Field */}
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder="Write Your Email"
-                                    className="input input-bordered"
-                                    required
-                                />
-                            </div>
+                                    <div className="form-control border px-3 ">
+                                        <label className="label ">
+                                            <span className="label-text text-lg">Last Name</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="lastName"
+                                            className="px-4  rounded-none bg-white"
+                                            required
+                                        />
+                                    </div>
+                                </div>
 
-                            {/* Password Field */}
-                            <div className="form-control relative">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input
-                                    type={showPassword ? "text" : "password"}  // Toggle type between "password" and "text"
-                                    name="password"
-                                    placeholder="Write Your Password"
-                                    className="input input-bordered"
-                                    required
-                                />
-                                {/* Eye Icon to toggle password visibility */}
-                                <span className="absolute right-4 bottom-4 cursor-pointer" onClick={togglePasswordVisibility}>
-                                    {showPassword ?  <FaEye /> : <FaEyeSlash /> }
-                                </span>
-                            </div>
 
-                            {/* Terms and Conditions */}
-                            <div className="mb-2">
-                                <input type="checkbox" name="terms" id="terms" />
-                                <label className="ml-2" htmlFor="terms">
-                                    Accept Our <a href="">Terms and Conditions</a>
-                                </label>
-                            </div>
+                                {/* <div className="form-control  border px-3 mr-4 ">
+                                    <label className="label">
+                                        <span className="label-text text-lg">Profile Picture(add a photo url)</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="photo"
+                                        className=" rounded-none bg-white"
+                                        required
+                                    />
+                                </div> */}
 
-                            {/* Register Button */}
-                            <div className="form-control mt-1">
-                                <button className="p-3 bg-blue-600 text-white rounded-md">Sign Up</button>
-                            </div>
-                        </form>
 
-                        {/* Additional Options */}
-                        <div className="flex flex-col items-center justify-center mb-6">
-                            <p className="text-[15px]">
-                                Already have an account? Please <Link to="/login"><button className="p-1 text-blue-700 font-bold">Login</button></Link>
-                            </p>
-                            <p>
-                                Or sign up with <button onClick={handleGoogleSignUp} className="btn bg-emerald-100 text-blue-700 font-bold"><FaGoogle />Google</button>
-                            </p>
+                                <div className="form-control  border px-3 mr-4 ">
+                                    <label className="label">
+                                        <span className=" label-text text-lg">Email</span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                      
+                                        className="  rounded-none bg-white"
+                                        required
+                                    />
+                                </div>
+
+
+                                <div className="form-control  border px-3 mr-4 relative">
+                                    <label className="label">
+                                        <span className="label-text text-lg">Password</span>
+                                    </label>
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        name="password"
+                                        className=" rounded-none bg-white"
+                                        required
+                                    />
+
+                                    <span className="absolute right-8 bottom-6 cursor-pointer" onClick={togglePasswordVisibility}>
+                                        {showPassword ? <FaEye /> : <FaEyeSlash />}
+                                    </span>
+                                </div>
+
+
+                                <div className="mb-1 text-black">
+                                    <input type="checkbox" name="terms" id="terms" />
+                                    <label className="ml-2" htmlFor="terms">
+                                        Accept Our <a href="">Terms and Conditions</a>
+                                    </label>
+                                </div>
+
+
+                                <div className="form-control">
+                                    <button className="p-3 bg-black text-white rounded-none mr-4">Sign Up</button>
+                                </div>
+                            </form>
+
+
+                            <div className="flex flex-col items-center justify-center ">
+                            <h1 className="text-lg mt-2">or</h1>
+                                <div className="flex justify-center items-center border py-2 px-4
+                                 gap-2 mb-2" onClick={handleGoogleSignUp}>
+                                    <FcGoogle />
+                                    <button className="p-1 text-black font-bold">Google</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="w-1/2 relative">
+                <img src="./hero-banner.png" className="h-screen w-full" alt="" />
+                <div className="flex flex-col justify-center items-center text-center mb-4 absolute bottom-40 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <img src="./logo.png" className="h-24 w-28" alt="" />
+                    <h1 className="text-sm text-white">Discover a seamless shopping experience with our curated collection of products. From fashion to electronics, we bring quality.</h1>
                 </div>
             </div>
             <ToastContainer

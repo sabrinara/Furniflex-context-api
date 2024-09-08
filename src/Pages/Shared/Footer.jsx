@@ -6,7 +6,7 @@ const Footer = () => {
         <footer className="w-full p-12 bg-black">
 
             <div className="flex flex-col lg:flex-row items-center justify-center gap-y-10   text-center md:justify-between">
-                <div className="flex  items-center  md:mr-10 lg:ml-20 ">
+                <div className="flex  items-center  md:mr-4 lg:ml-20 ">
                     <img className="w-18 h-20" src={Logo} alt="" />
 
                 </div>
@@ -14,7 +14,7 @@ const Footer = () => {
                 <ul className="flex flex-col lg:flex-row flex-wrap items-start gap-y-2 gap-x-14 lg:mr-20">
                     <li>
                         <a
-                            href="/about"
+                            href="#"
                             className="block font-sans text-xl font-bold leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-cyan-800 focus:text-cyan-800"
                         >
                             About Us
@@ -33,7 +33,7 @@ const Footer = () => {
                     <li>
                         <a
                             href="#"
-                            className="block font-sans text-xl font-bold leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-cyan-800 focus:text-cyan-800"
+                            className="mr-8 block font-sans text-xl font-bold leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-cyan-800 focus:text-cyan-800"
                         >
                             Explore EEVE
                         </a>
@@ -64,7 +64,7 @@ const Footer = () => {
 
             <hr className="my-8 border-w " />
             <div className="flex flex-col items-center justify-center gap-4 lg:flex-row lg:justify-between">
-                <div className="grid grid-flow-col gap-6 text-white m-6 justify-center " target="blank">
+                <div className="grid grid-flow-col gap-6 text-white m-4 justify-center " target="blank">
                     <a rel="noopener noreferrer" href="https://www.facebook.com/" target="_blank" ><FaFacebook className="md:w-5 md:h-5 "></FaFacebook></a>
                     <a rel="noopener noreferrer" href="https://www.instagram.com/" target="_blank"><FaInstagram className="md:w-5 md:h-5" ></FaInstagram></a>
                     <a rel="noopener noreferrer" href="https://twitter.com/" target="_blank"><FaTwitter className="md:w-5 md:h-5" ></FaTwitter></a>
@@ -76,8 +76,9 @@ const Footer = () => {
                     <h1>General Terms</h1>
                     <h1>Contact</h1>
                 </div>
-                <div>
-                    <h1>🇺🇸
+                <div className="flex  items-center gap-4">
+                    <img src="./Flag.png" alt="" />
+                    <h1>
                     United States (English)</h1>
                 </div>
             </div>

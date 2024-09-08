@@ -70,7 +70,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="sticky inset-0 z-10 block h-max w-full max-w-full rounded-none  bg-opacity-40 px-4  backdrop-blur-2xl backdrop-saturate-200 md:px-8 ">
+    <div className="sticky inset-0 z-10 block h-max w-full max-w-full rounded-none  bg-opacity-40 px-4  backdrop-blur-xl backdrop-saturate-100 md:px-8 ">
       <div className="navbar p-1 ">
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
@@ -109,7 +109,14 @@ const Navbar = () => {
 
         <div className="navbar-end">
           <div className="flex flex-row items-center justify-center gap-4">
-          <FaCartArrowDown className="w-6 h-6 ml-3 text-gray-500"></FaCartArrowDown>
+        <div>
+          {
+            user?.email &&
+           <Link to="/cart">
+           <FaCartArrowDown className="w-6 h-6 ml-3 text-gray-700"></FaCartArrowDown>
+           </Link>
+          }
+        </div>
             {
               user?.email &&
 
@@ -125,47 +132,7 @@ const Navbar = () => {
                       {user.displayName}
                     </a>
                   </li>
-                  <div className="dropdown dropdown-bottom">
-                    <label
-                      tabIndex={0}
-                      className=' ml-3'
-                      onClick={toggleDashboardDropdown}
-                    >
-                      Dashboard
-                    </label>
-                    {showDashboardDropdown && (
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content z-[3] menu shadow rounded w-40 bg-sky-800 bg-opacity-80 text-white"
-                      >
-
-                        <NavLink
-                          to="/addservice"
-                          className="px-4 py-1 hover:bg-base-300 rounded-lg"
-                        >
-                          Add a Service
-                        </NavLink>
-                        <NavLink
-                          to="/manageservices"
-                          className="px-4 py-1 hover:bg-base-300 rounded-lg"
-                        >
-                          My Services
-                        </NavLink>
-                        <NavLink
-                          to="/bookings"
-                          className="px-4 py-1 hover:bg-base-300 rounded-lg"
-                        >
-                          My Sechedules
-                        </NavLink>
-                        <NavLink
-                          to="/pending"
-                          className="px-4 py-1 hover:bg-base-300 rounded-lg"
-                        >
-                          My Pendings
-                        </NavLink>
-                      </ul>
-                    )}
-                  </div>
+                
                   <li ><a onClick={handleLogOut} className="hover:bg-cyan-900 hover:text-white  focus:text-white" >Logout</a></li>
                 </ul>
               </div>
