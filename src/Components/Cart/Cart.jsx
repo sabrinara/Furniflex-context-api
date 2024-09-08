@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -36,6 +37,10 @@ const Cart = () => {
     const updatedCart = cartItems.filter((item) => item.id !== productId);
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const handlePayment = () => {
+    alert("Payment Successful");
   };
 
   return (
@@ -124,6 +129,7 @@ const Cart = () => {
             </div>
             <div className="bg-black px-2 text-center rounded text-base mt-4">
               <button
+              onClick={handlePayment}
                 className="bg-black text-white py-3 rounded">
                 GO TO CHECKOUT
               </button>
